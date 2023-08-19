@@ -40,3 +40,10 @@ body {
 .suit {
   font-size: 10vw;
 }
+.red-text {
+  color: red;
+}
+
+.black-text {
+  color: black;
+}
