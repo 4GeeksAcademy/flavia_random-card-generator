@@ -5,11 +5,51 @@ body {
   display: inline-block;
   margin: auto;
   background-color: white;
-  height: 80vh;
+  height: 90vh;
   width: 25vw;
+  flex-direction: column;
+  border: 1px solid black;
+  margin-top: 2%;
 }
-.top-suit {
-  position: absolute;
-  top: 0;
-  left: 0;
+.top {
+  height: 15%;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  padding-top: 45px;
+}
+.number {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10vw;
+}
+.bottom {
+  height: 15%;
+  text-align: right;
+  display: flex;
+  align-items: flex-end;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  padding-bottom: 55px;
+}
+.heart {
+  color: red;
+  font-size: 10vw;
+}
+.diamond {
+  color: red;
+  font-size: 10vw;
+}
+.spade {
+  color: black;
+  font-size: 10vw;
+}
+.club {
+  color: black;
+  font-size: 10vw;
 }
