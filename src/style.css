@@ -37,19 +37,6 @@ body {
   padding-right: 20px;
   padding-bottom: 55px;
 }
-.heart {
-  color: red;
-  font-size: 10vw;
-}
-.diamond {
-  color: red;
-  font-size: 10vw;
-}
-.spade {
-  color: black;
-  font-size: 10vw;
-}
-.club {
-  color: black;
+.suit {
   font-size: 10vw;
 }
