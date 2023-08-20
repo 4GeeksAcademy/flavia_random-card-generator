@@ -56,5 +56,5 @@ body {
 .img-modificada {
   height: 75vh;
   position: relative;
-  width: fit-content;
+  width: 100%;
 }
