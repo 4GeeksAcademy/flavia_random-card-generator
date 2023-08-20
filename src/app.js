@@ -27,7 +27,8 @@ window.onload = function() {
 
   const cardNumbers = [
     Math.floor(Math.random() * 9) + 2,
-    '<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSHdR-DiLOvADl0me4JGJOhsPZEgNVMogG53a48eNi8W3DanH72">',
+    "rey",
+    "reina",
     "J",
     "A"
   ];
@@ -37,8 +38,13 @@ window.onload = function() {
   let numberCard = document.querySelector(".number");
   if (indexNumber === 1) {
     let imgElement = document.createElement("img");
-    imgElement.src =
-      "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSHdR-DiLOvADl0me4JGJOhsPZEgNVMogG53a48eNi8W3DanH72";
+    imgElement.src = "src/img/rey.jpg";
+    imgElement.classList.add("img-modificada");
+    numberCard.appendChild(imgElement);
+  } else if (indexNumber === 2) {
+    let imgElement = document.createElement("img");
+    imgElement.src = "src/img/reina.jpg";
+    imgElement.classList.add("img-modificada");
     numberCard.appendChild(imgElement);
   } else {
     numberCard.textContent = randomNumber.textContent;

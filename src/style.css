@@ -17,15 +17,10 @@ body {
   display: flex;
   align-items: flex-start;
   align-items: center;
-  padding-left: 20px;
-  padding-top: 45px;
-}
-.number {
-  height: 70%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 10vw;
+  padding-left: 10px;
+  padding-top: 20px;
+  position: relative; /* Agrega posicionamiento relativo */
+  z-index: 2;
 }
 .bottom {
   height: 15%;
@@ -34,8 +29,18 @@ body {
   align-items: flex-end;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 20px;
-  padding-bottom: 55px;
+  padding-right: 10px;
+  padding-top: 20px;
+  transform: scaleY(-1);
+  z-index: 2;
+}
+.number {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10vw;
+  z-index: 1;
 }
 .suit {
   font-size: 10vw;
@@ -46,4 +51,10 @@ body {
 
 .black-text {
   color: black;
+}
+
+.img-modificada {
+  height: 80vh;
+  position: relative;
+  width: 100%;
 }
