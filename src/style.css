@@ -5,7 +5,7 @@ body {
   display: inline-block;
   margin: auto;
   background-color: white;
-  height: 90vh;
+  height: 85vh;
   width: 25vw;
   flex-direction: column;
   border: 1px solid black;
@@ -54,7 +54,7 @@ body {
 }
 
 .img-modificada {
-  height: 80vh;
+  height: 75vh;
   position: relative;
-  width: 100%;
+  width: fit-content;
 }
