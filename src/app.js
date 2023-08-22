@@ -23,101 +23,55 @@ function theContentOfTheCards() {
     numbers: [Math.floor(Math.random() * 9) + 2, "J", "A", "queen", "king"]
   };
 
-  //Genero un index random para elegir un contenido random en cada array
+  //Genero un index random para elegir un palo random y luego dependiendo del index agrego un color
   let indexSuit = Math.floor(Math.random() * myCard.suit.length);
   let suitContent = myCard.suit[indexSuit];
+  let mySuitSpan = document.createElement("span");
+  mySuitSpan.textContent = suitContent;
+
+  if (indexSuit === 0 || indexSuit === 1) {
+    mySuitSpan.style.color = "red";
+  } else {
+    mySuitSpan.style.color = "black";
+  }
+
+  //Genero un index random para elegir un número o una imagen
   let indexNumbers = Math.floor(Math.random() * myCard.numbers.length);
   let numbersContent = myCard.numbers[indexNumbers];
+  let myNumberSpan = document.createElement("span");
 
-  //Declaro los elementos top y bottom para los iconos y le agrego el contenido random anterior
-  let topCard = document.getElementById("topCard");
-  topCard.textContent = suitContent;
-  let bottomCard = document.getElementById("bottomCard");
-  bottomCard.textContent = suitContent;
-  if (indexSuit === 0 || indexSuit === 1) {
-    topCard.style.color = "red";
-    bottomCard.style.color = "red";
+  let theQueenClone = theQueen.cloneNode();
+  let theKingClone = theKing.cloneNode();
+
+  if (numbersContent === "queen") {
+    myNumberSpan.appendChild(theQueenClone);
+  } else if (numbersContent === "king") {
+    myNumberSpan.appendChild(theKingClone);
   } else {
-    topCard.style.color = "black";
-    bottomCard.style.color = "black";
+    myNumberSpan.textContent = numbersContent;
   }
 
-  //Declaro el elemento del medio donde irá el contenido. Utilizo el condicional para agregar de forma específica si es una imagen.
-  let middleCard = document.querySelector(".number");
-  middleCard.innerHTML = "";
-  if (indexNumbers === 3) {
-    middleCard.appendChild(theQueen.cloneNode());
-  } else if (indexNumbers === 4) {
-    middleCard.appendChild(theKing.cloneNode());
-  } else {
-    middleCard.textContent = numbersContent;
-  }
+  return [mySuitSpan.textContent, myNumberSpan.innerHTML];
 }
-window.onload = theContentOfTheCards;
-myShuffleCards.addEventListener("click", theContentOfTheCards);
 
-/* CÓDIGO ANTERIOR. EL DE ARRIBA ES EL MEJORADO
+let theTop, theNumber, theBottom, contentFunction;
+
 window.onload = function() {
-  //write your code here
-  console.log("Hello Rigo from the console!");
-  const cardClasses = ["♦", "♥", "♠", "♣"];
-  const randomIndex = Math.floor(Math.random() * cardClasses.length);
-  const randomContent = document.createTextNode(cardClasses[randomIndex]);
+  theTop = document.getElementById("topCard");
+  theNumber = document.getElementById("theContent");
+  theBottom = document.getElementById("bottomCard");
+  contentFunction = theContentOfTheCards();
 
-  let topCard = document.querySelector(".top");
-  topCard.textContent = randomContent.textContent;
-  let bottomCard = document.querySelector(".bottom");
-  bottomCard.textContent = randomContent.textContent;
+  myShuffleCards.addEventListener("click", function() {
+    let suitSpan = document.createElement("div");
+    suitSpan.textContent = contentFunction[0];
+    console.log(suitSpan);
+    let numberSpan = document.createElement("div");
+    numberSpan.innerHTML = contentFunction[1];
+    console.log(numberSpan);
 
-  if (randomIndex === 0 || randomIndex === 1) {
-    topCard.classList.add("red-text");
-    bottomCard.classList.add("red-text");
-  } else {
-    topCard.classList.add("black-text");
-    bottomCard.classList.add("black-text");
-  }
-
-  const cardNumbers = [
-    Math.floor(Math.random() * 9) + 2,
-    "rey",
-    "reina",
-    "J",
-    "A"
-  ];
-  const indexNumber = Math.floor(Math.random() * cardNumbers.length);
-  const randomNumber = document.createTextNode(cardNumbers[indexNumber]);
-
-  let numberCard = document.querySelector(".number");
-  if (indexNumber === 1) {
-    let imgElement = document.createElement("img");
-    imgElement.src = "src/img/rey.jpg";
-    imgElement.classList.add("img-modificada");
-    numberCard.appendChild(imgElement);
-  } else if (indexNumber === 2) {
-    let imgElement = document.createElement("img");
-    imgElement.src = "src/img/reina.jpg";
-    imgElement.classList.add("img-modificada");
-    numberCard.appendChild(imgElement);
-  } else {
-    numberCard.textContent = randomNumber.textContent;
-  }
+    theTop.appendChild(suitSpan);
+    theNumber.appendChild(numberSpan);
+    theBottom.appendChild(suitSpan.cloneNode());
+  });
 };
-
-window.addCard = function addCard() {
-  let newCard = document.createElement("div");
-  newCard.classList.add("card");
-  newCard.classList.add("theNewCard");
-  let topCard = document.createElement("div");
-  topCard.classList.add("top");
-  let numberCard = document.createElement("div");
-  numberCard.classList.add("number");
-  let bottomCard = document.createElement("div");
-  bottomCard.classList.add("bottom");
-
-  newCard.appendChild(topCard);
-  newCard.appendChild(numberCard);
-  newCard.appendChild(bottomCard);
-
-  document.body.appendChild(newCard);
-};
-*/
