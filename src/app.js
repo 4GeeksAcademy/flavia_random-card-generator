@@ -28,9 +28,9 @@ function theContentOfTheCards() {
   mySuitSpan.textContent = suitContent;
 
   if (indexSuit === 0 || indexSuit === 1) {
-    mySuitSpan.style.color = "red";
+    mySuitSpan.classList.add("red-text");
   } else {
-    mySuitSpan.style.color = "black";
+    mySuitSpan.classList.add("black-text");
   }
 
   //Genero un index random para elegir un número o una imagen
@@ -48,9 +48,7 @@ function theContentOfTheCards() {
   } else {
     myNumberSpan.textContent = numbersContent;
   }
-  console.log(mySuitSpan.textContent);
-  console.log(myNumberSpan.innerHTML);
-  return [mySuitSpan.textContent, myNumberSpan.innerHTML];
+  return [mySuitSpan, myNumberSpan];
 }
 
 //Función para la actualización del contenido de las cartas
@@ -62,16 +60,16 @@ function updateCardDisplay() {
   let contentFunction = theContentOfTheCards();
 
   let suitSpan = document.createElement("div");
-  suitSpan.textContent = contentFunction[0];
+  suitSpan.appendChild(contentFunction[0].cloneNode(true));
   let numberSpan = document.createElement("div");
-  numberSpan.innerHTML = contentFunction[1];
+  numberSpan.appendChild(contentFunction[1].cloneNode(true));
 
   theTop.innerHTML = "";
-  theTop.textContent = suitSpan.textContent;
+  theTop.appendChild(suitSpan);
   theNumber.innerHTML = "";
   theNumber.appendChild(numberSpan);
   theBottom.innerHTML = "";
-  theBottom.textContent = suitSpan.textContent;
+  theBottom.appendChild(suitSpan.cloneNode(true));
 }
 
 // Ejecutar inicialmente al cargar la página
