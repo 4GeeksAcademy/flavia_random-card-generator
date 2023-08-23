@@ -2,11 +2,15 @@
 import "bootstrap";
 import "./style.css";
 
-import "./assets/img/rigo-baby.jpg";
-import "./assets/img/4geeks.ico";
-
 let myShuffleCards = document.getElementById("shuffleCards");
 
+//El objeto con los arrays de contenido
+let myCard = {
+  suit: ["♦", "♥", "♠", "♣"],
+  numbers: [Math.floor(Math.random() * 9) + 2, "J", "A", "queen", "king"]
+};
+
+//Función para generar el contenido de las cartas
 function theContentOfTheCards() {
   //Las imagenes para poder renderizarlas más fácilmente
   let theQueen = document.createElement("img");
@@ -16,12 +20,6 @@ function theContentOfTheCards() {
   let theKing = document.createElement("img");
   theKing.src = "https://i.postimg.cc/vm3HgYdT/rey3-1.jpg";
   theKing.classList.add("img-modificada");
-
-  //El objeto con los arrays de contenido
-  let myCard = {
-    suit: ["♦", "♥", "♠", "♣"],
-    numbers: [Math.floor(Math.random() * 9) + 2, "J", "A", "queen", "king"]
-  };
 
   //Genero un index random para elegir un palo random y luego dependiendo del index agrego un color
   let indexSuit = Math.floor(Math.random() * myCard.suit.length);
@@ -50,28 +48,36 @@ function theContentOfTheCards() {
   } else {
     myNumberSpan.textContent = numbersContent;
   }
-
+  console.log(mySuitSpan.textContent);
+  console.log(myNumberSpan.innerHTML);
   return [mySuitSpan.textContent, myNumberSpan.innerHTML];
 }
 
-let theTop, theNumber, theBottom, contentFunction;
+//Función para la actualización del contenido de las cartas
+function updateCardDisplay() {
+  let theTop = document.getElementById("topCard");
+  let theNumber = document.getElementById("theContent");
+  let theBottom = document.getElementById("bottomCard");
 
-window.onload = function() {
-  theTop = document.getElementById("topCard");
-  theNumber = document.getElementById("theContent");
-  theBottom = document.getElementById("bottomCard");
-  contentFunction = theContentOfTheCards();
+  let contentFunction = theContentOfTheCards();
 
-  myShuffleCards.addEventListener("click", function() {
-    let suitSpan = document.createElement("div");
-    suitSpan.textContent = contentFunction[0];
-    console.log(suitSpan);
-    let numberSpan = document.createElement("div");
-    numberSpan.innerHTML = contentFunction[1];
-    console.log(numberSpan);
+  let suitSpan = document.createElement("div");
+  suitSpan.textContent = contentFunction[0];
+  let numberSpan = document.createElement("div");
+  numberSpan.innerHTML = contentFunction[1];
 
-    theTop.appendChild(suitSpan);
-    theNumber.appendChild(numberSpan);
-    theBottom.appendChild(suitSpan.cloneNode());
-  });
-};
+  theTop.innerHTML = "";
+  theTop.textContent = suitSpan.textContent;
+  theNumber.innerHTML = "";
+  theNumber.appendChild(numberSpan);
+  theBottom.innerHTML = "";
+  theBottom.textContent = suitSpan.textContent;
+}
+
+// Ejecutar inicialmente al cargar la página
+updateCardDisplay();
+
+//Llamo dentro del shuffle a la función de actualización para que la función se ejecute cada vez que hago click
+myShuffleCards.addEventListener("click", function() {
+  updateCardDisplay();
+});
