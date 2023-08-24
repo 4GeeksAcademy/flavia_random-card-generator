@@ -111,14 +111,15 @@ function addNewCard(positionClass) {
 
   document.body.appendChild(newCard);
 }
+//Evento para agregar una carta a la derecha
 let myAddCard = document.getElementById("addCard");
 myAddCard.addEventListener("click", function() {
   addNewCard("rightNewCard");
 });
 
 let myAddTimer = document.getElementById("addCardTimer");
+//Evento para agregar una carta cada 1 segundo
 let intervalId = null; // Variable para almacenar el ID del intervalo
-
 myAddTimer.addEventListener("click", function() {
   if (intervalId === null) {
     intervalId = setInterval(function() {
@@ -128,4 +129,32 @@ myAddTimer.addEventListener("click", function() {
     clearInterval(intervalId); // Detener el intervalo si ya está en marcha
     intervalId = null;
   }
+});
+
+//Función para manipular el ancho y el largo de la carta principal, por eso nos interesa que el evento sea cuando el DOM esté completamente cargado
+document.addEventListener("DOMContentLoaded", function() {
+  let myWidthInput = document.getElementById("widthInput");
+  function modifyWidth() {
+    let inputValue = myWidthInput.value;
+    let myCard = document.querySelector(".card");
+    myCard.style.width = `${inputValue}vw`;
+  }
+
+  let myWidthButton = document.getElementById("widthButton");
+  myWidthButton.addEventListener("click", () => {
+    modifyWidth();
+  });
+
+  let myHeightInput = document.getElementById("heightInput");
+  function modifyHeight() {
+    let inputValue = myHeightInput.value;
+    let myCard = document.querySelector(".card");
+    myCard.style.height = `${inputValue}vh`;
+  }
+
+  let myHeightButton = document.getElementById("heightButton");
+  myHeightButton,
+    this.addEventListener("click", () => {
+      modifyHeight();
+    });
 });
