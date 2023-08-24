@@ -2,8 +2,6 @@
 import "bootstrap";
 import "./style.css";
 
-let myShuffleCards = document.getElementById("shuffleCards");
-
 //El objeto con los arrays de contenido
 let myCard = {
   suit: ["♦", "♥", "♠", "♣"],
@@ -41,6 +39,7 @@ function theContentOfTheCards() {
   let theQueenClone = theQueen.cloneNode();
   let theKingClone = theKing.cloneNode();
 
+  //Y si el contenido es queen o king adjunto una imagen al span
   if (numbersContent === "queen") {
     myNumberSpan.appendChild(theQueenClone);
   } else if (numbersContent === "king") {
@@ -72,10 +71,61 @@ function updateCardDisplay() {
   theBottom.appendChild(suitSpan.cloneNode(true));
 }
 
-// Ejecutar inicialmente al cargar la página
+// Ejecutar inicialmente al cargar la página para que no aparezca una carta en blanco
 updateCardDisplay();
 
+let myShuffleCards = document.getElementById("shuffleCards");
 //Llamo dentro del shuffle a la función de actualización para que la función se ejecute cada vez que hago click
 myShuffleCards.addEventListener("click", function() {
   updateCardDisplay();
+});
+
+//Función para añadir una carta o en el lado izquierdo o derecho según la clase css que se introduzca como parametro
+function addNewCard(positionClass) {
+  let newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.classList.add(positionClass);
+  let newTopCard = document.createElement("div");
+  newTopCard.classList.add("top");
+  let newNumberCard = document.createElement("div");
+  newNumberCard.classList.add("number");
+  let newBottomCard = document.createElement("div");
+  newBottomCard.classList.add("bottom");
+  newCard.appendChild(newTopCard);
+  newCard.appendChild(newNumberCard);
+  newCard.appendChild(newBottomCard);
+
+  let contentFunction = theContentOfTheCards();
+
+  let suitSpan = document.createElement("div");
+  suitSpan.appendChild(contentFunction[0].cloneNode(true));
+  let numberSpan = document.createElement("div");
+  numberSpan.appendChild(contentFunction[1].cloneNode(true));
+
+  newTopCard.innerHTML = "";
+  newTopCard.appendChild(suitSpan);
+  newNumberCard.innerHTML = "";
+  newNumberCard.appendChild(numberSpan);
+  newBottomCard.innerHTML = "";
+  newBottomCard.appendChild(suitSpan.cloneNode(true));
+
+  document.body.appendChild(newCard);
+}
+let myAddCard = document.getElementById("addCard");
+myAddCard.addEventListener("click", function() {
+  addNewCard("rightNewCard");
+});
+
+let myAddTimer = document.getElementById("addCardTimer");
+let intervalId = null; // Variable para almacenar el ID del intervalo
+
+myAddTimer.addEventListener("click", function() {
+  if (intervalId === null) {
+    intervalId = setInterval(function() {
+      addNewCard("leftNewCard");
+    }, 1000);
+  } else {
+    clearInterval(intervalId); // Detener el intervalo si ya está en marcha
+    intervalId = null;
+  }
 });

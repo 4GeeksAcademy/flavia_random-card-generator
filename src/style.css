@@ -58,11 +58,21 @@ body {
   position: relative;
   width: 100%;
 }
-.theNewCard {
+.leftNewCard {
   position: absolute;
   top: 52%;
   transform: translateY(-50%);
   height: 85vh;
   width: 25vw;
   margin-left: 5%;
+}
+
+.rightNewCard {
+  position: absolute;
+  top: 10%;
+  transform: translateX(268%);
+  height: 85vh;
+  width: 25vw;
+  margin-right: 5%;
+  margin-left: none;
 }
